@@ -1,0 +1,111 @@
+# =============================================================================
+# Flutter Vault — Local-First Encrypted Password Manager
+# =============================================================================
+# This pubspec defines the project metadata and all required dependencies
+# for a security-focused password manager that operates entirely offline.
+#
+# SECURITY NOTES:
+# - pointycastle: Pure Dart crypto library for Argon2id KDF and AES-256-GCM.
+# - encrypt: High-level wrapper around pointycastle for convenience.
+# - flutter_secure_storage: Platform keystore integration (Android Keystore,
+#   iOS Keychain) for storing sensitive key material like salts and auth hashes.
+# - sqflite: Local SQLite database for structured vault item storage.
+# - local_auth: Biometric authentication (fingerprint, Face ID).
+# - flutter_jailbreak_detection: Root/jailbreak detection for environment
+#   integrity checks.
+# - fl_chart: Charting library for the security audit dashboard.
+# - flutter_riverpod: State management with proper disposal semantics for
+#   sensitive data lifecycle management.
+# - crypto: SHA-256 hashing for PIN mixing and k-Anonymity breach checks.
+# - convert: Base64/hex encoding utilities for serialization.
+# =============================================================================
+
+name: flutter_vault
+description: A local-first encrypted password manager with AES-256-GCM encryption, Argon2id KDF, biometric authentication, and comprehensive security auditing.
+version: 1.0.0+1
+
+# Enforce modern Dart with full null safety.
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.10.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ---------------------------------------------------------------------------
+  # CRYPTOGRAPHY
+  # ---------------------------------------------------------------------------
+  # pointycastle provides low-level crypto primitives including Argon2id
+  # (password hashing / key derivation) and AES-GCM (authenticated encryption).
+  # We use this directly rather than through 'encrypt' for Argon2id, since
+  # the 'encrypt' package does not expose Argon2id.
+  pointycastle: ^3.9.1
+
+  # encrypt provides a convenient high-level API for AES encryption.
+  # We use it alongside pointycastle for certain operations.
+  encrypt: ^5.0.3
+
+  # crypto provides SHA-256 for PIN mixing and k-Anonymity prefix hashing.
+  crypto: ^3.0.3
+
+  # convert provides base64/hex encoding for serialization of binary data.
+  # Part of the Dart SDK but explicitly listed for clarity.
+  convert: ^3.1.1
+
+  # ---------------------------------------------------------------------------
+  # SECURE STORAGE
+  # ---------------------------------------------------------------------------
+  # flutter_secure_storage wraps Android Keystore and iOS Keychain for
+  # storing small sensitive values (salt, auth hash) with hardware-backed
+  # encryption where available.
+  flutter_secure_storage: ^9.2.2
+
+  # sqflite provides a local SQLite database for structured storage of
+  # encrypted vault items. Data at rest is AES-256-GCM encrypted before
+  # being written to SQLite, so even a raw DB dump reveals nothing.
+  sqflite: ^2.3.3+1
+
+  # path provides cross-platform path manipulation for locating the
+  # database file on the filesystem.
+  path: ^1.9.0
+
+  # ---------------------------------------------------------------------------
+  # AUTHENTICATION
+  # ---------------------------------------------------------------------------
+  # local_auth integrates with platform biometric APIs (fingerprint, Face ID,
+  # iris) for convenient secondary authentication.
+  local_auth: ^2.3.0
+
+  # ---------------------------------------------------------------------------
+  # ENVIRONMENT INTEGRITY
+  # ---------------------------------------------------------------------------
+  # flutter_jailbreak_detection detects rooted Android devices and jailbroken
+  # iOS devices, which compromise the OS security model we rely on.
+  flutter_jailbreak_detection: ^1.10.0
+
+  # ---------------------------------------------------------------------------
+  # UI & STATE MANAGEMENT
+  # ---------------------------------------------------------------------------
+  # fl_chart provides pie charts for the security audit dashboard,
+  # visualizing password health metrics.
+  fl_chart: ^0.68.0
+
+  # flutter_riverpod is used for state management with proper lifecycle
+  # semantics — critical for ensuring the master key Uint8List is zeroed
+  # when the provider is disposed.
+  flutter_riverpod: ^2.5.1
+
+  # Material design icons and theming.
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.2
+
+flutter:
+  uses-material-design: true
+
+  # No assets or fonts — the app is purely functional.
+  # Custom fonts could be added here if desired.
