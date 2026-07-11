@@ -19,41 +19,41 @@
 /* ─── CSS Custom Properties (Design Tokens) ──────────────────────────────── */
 
 :root {
-  /* Core Palette */
-  --bg-void: #000000;
-  --bg-surface: #0a0a0f;
-  --bg-elevated: #111118;
-  --bg-card: #16161f;
-  --bg-card-hover: #1c1c28;
+  /* Core Palette (Luxury Minimalist Glassy) */
+  --bg-void: #0f1115;
+  --bg-surface: #14161a;
+  --bg-elevated: #1a1d24;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.05);
 
-  /* Accent Colors */
-  --accent-primary: #00f0ff;
-  --accent-primary-dim: #00a8b3;
-  --accent-secondary: #ffb800;
-  --accent-secondary-dim: #b38200;
-  --accent-danger: #ff3b5c;
-  --accent-danger-dim: #b32940;
-  --accent-success: #00ff88;
-  --accent-success-dim: #00b35f;
-  --accent-warning: #ffb800;
+  /* Accent Colors (Monochrome/Subtle) */
+  --accent-primary: #ffffff;
+  --accent-primary-dim: #cccccc;
+  --accent-secondary: #aaaaaa;
+  --accent-secondary-dim: #777777;
+  --accent-danger: #e57373;
+  --accent-danger-dim: #d32f2f;
+  --accent-success: #81c784;
+  --accent-success-dim: #388e3c;
+  --accent-warning: #ffb74d;
 
   /* Text */
-  --text-primary: #f0f0f5;
-  --text-secondary: #8888a0;
-  --text-tertiary: #555570;
+  --text-primary: #ffffff;
+  --text-secondary: #9ba1a6;
+  --text-tertiary: #6b7280;
   --text-accent: var(--accent-primary);
 
   /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-active: rgba(0, 240, 255, 0.3);
-  --border-glow: rgba(0, 240, 255, 0.15);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(255, 255, 255, 0.25);
+  --border-glow: rgba(255, 255, 255, 0.1);
 
-  /* Shadows & Glows */
-  --glow-primary: 0 0 20px rgba(0, 240, 255, 0.15), 0 0 60px rgba(0, 240, 255, 0.05);
-  --glow-danger: 0 0 20px rgba(255, 59, 92, 0.2), 0 0 60px rgba(255, 59, 92, 0.08);
-  --glow-success: 0 0 20px rgba(0, 255, 136, 0.15), 0 0 60px rgba(0, 255, 136, 0.05);
-  --glow-warning: 0 0 20px rgba(255, 184, 0, 0.15), 0 0 60px rgba(255, 184, 0, 0.05);
-  --shadow-card: 0 4px 32px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.05);
+  /* Shadows & Glows (Subtle depth, no neon) */
+  --glow-primary: 0 4px 24px rgba(0, 0, 0, 0.2);
+  --glow-danger: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --glow-success: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --glow-warning: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
 
   /* Spacing & Sizing */
   --radius-sm: 8px;
@@ -67,7 +67,7 @@
   --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* Fonts — Using Outfit (display) + DM Sans (body) */
+  /* Fonts */
   --font-display: 'Outfit', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -99,13 +99,9 @@ body {
 /* ─── Glassmorphic Card System ───────────────────────────────────────────── */
 
 .glass-card {
-  background: linear-gradient(
-    135deg,
-    rgba(22, 22, 31, 0.85),
-    rgba(10, 10, 15, 0.95)
-  );
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
@@ -139,24 +135,24 @@ body {
   position: relative;
 }
 
-/* Weak: Red pulsing glow */
+/* Weak: Soft red/rose */
 .entropy-bar-fill.weak {
-  background: linear-gradient(90deg, #ff3b5c, #ff6b8a);
-  box-shadow: 0 0 12px rgba(255, 59, 92, 0.4);
+  background: var(--accent-danger);
+  box-shadow: 0 0 8px rgba(229, 115, 115, 0.4);
   animation: entropy-pulse-weak 2s ease-in-out infinite;
 }
 
-/* Good: Amber/yellow steady glow */
+/* Good: Soft amber/gold */
 .entropy-bar-fill.good {
-  background: linear-gradient(90deg, #ffb800, #ffd000);
-  box-shadow: 0 0 12px rgba(255, 184, 0, 0.3);
+  background: var(--accent-warning);
+  box-shadow: 0 0 8px rgba(255, 183, 77, 0.4);
   animation: entropy-pulse-good 3s ease-in-out infinite;
 }
 
-/* Excellent: Green bright glow */
+/* Excellent: Soft green/sage */
 .entropy-bar-fill.excellent {
-  background: linear-gradient(90deg, #00ff88, #00d4ff);
-  box-shadow: 0 0 16px rgba(0, 255, 136, 0.3);
+  background: var(--accent-success);
+  box-shadow: 0 0 8px rgba(129, 199, 132, 0.4);
   animation: entropy-pulse-excellent 4s ease-in-out infinite;
 }
 
@@ -166,13 +162,13 @@ body {
 }
 
 @keyframes entropy-pulse-good {
-  0%, 100% { box-shadow: 0 0 12px rgba(255, 184, 0, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(255, 184, 0, 0.5); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
 }
 
 @keyframes entropy-pulse-excellent {
-  0%, 100% { box-shadow: 0 0 16px rgba(0, 255, 136, 0.3); }
-  50% { box-shadow: 0 0 28px rgba(0, 255, 136, 0.5), 0 0 60px rgba(0, 212, 255, 0.2); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
 }
 
 /* ─── Toggle Switch Component ────────────────────────────────────────────── */
@@ -190,9 +186,9 @@ body {
 }
 
 .toggle-switch.active {
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary-dim));
+  background: var(--accent-primary);
   border-color: var(--accent-primary);
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.15);
 }
 
 .toggle-switch::after {
@@ -210,6 +206,7 @@ body {
 
 .toggle-switch.active::after {
   transform: translateX(20px);
+  background: var(--bg-void);
 }
 
 /* ─── Custom Range Slider ────────────────────────────────────────────────── */
@@ -231,27 +228,27 @@ body {
   appearance: none;
   width: 22px;
   height: 22px;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary-dim));
+  background: var(--accent-primary);
   border-radius: 50%;
-  border: 2px solid var(--bg-void);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: transform var(--transition-spring), box-shadow var(--transition-smooth);
 }
 
 .range-slider::-webkit-slider-thumb:hover {
   transform: scale(1.15);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5), 0 2px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .range-slider::-moz-range-thumb {
   width: 22px;
   height: 22px;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary-dim));
+  background: var(--accent-primary);
   border-radius: 50%;
-  border: 2px solid var(--bg-void);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ─── Breach Alert Banners ───────────────────────────────────────────────── */
@@ -276,12 +273,11 @@ body {
 }
 
 .alert-banner.breached {
-  background: rgba(255, 59, 92, 0.08);
-  border-color: rgba(255, 59, 92, 0.2);
+  background: rgba(229, 115, 115, 0.08);
+  border-color: rgba(229, 115, 115, 0.2);
   color: var(--accent-danger);
   box-shadow: var(--glow-danger);
-  animation: alert-slide-in 400ms cubic-bezier(0.34, 1.56, 0.64, 1),
-             breach-pulse 2s ease-in-out infinite;
+  animation: alert-slide-in 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .alert-banner.error {
@@ -292,9 +288,9 @@ body {
 }
 
 .alert-banner.loading {
-  background: rgba(0, 240, 255, 0.06);
-  border-color: rgba(0, 240, 255, 0.15);
-  color: var(--accent-primary);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
 }
 
 @keyframes alert-slide-in {
@@ -325,7 +321,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary-dim));
+  background: rgba(255, 255, 255, 0.08);
   opacity: 0;
   transition: opacity var(--transition-smooth);
   border-radius: inherit;
@@ -349,7 +345,7 @@ body {
   word-break: break-all;
   line-height: 1.8;
   color: var(--text-primary);
-  text-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+  text-shadow: none;
 }
 
 /* ─── Mode Toggle (Password ↔ Passphrase) ────────────────────────────────── */
@@ -381,7 +377,7 @@ body {
 .mode-toggle-btn.active {
   color: var(--bg-void);
   background: var(--accent-primary);
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ─── Cinematic Entrance Animations ──────────────────────────────────────── */
@@ -406,7 +402,7 @@ body {
 .animate-in-delay-3 { animation-delay: 300ms; }
 .animate-in-delay-4 { animation-delay: 400ms; }
 
-/* ─── Cyber Grid Background Animation ──────────────────────────────────────── */
+/* ─── Ambient Gradient Mesh Animation ──────────────────────────────────────── */
 
 .ambient-glow {
   position: fixed;
@@ -414,37 +410,27 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  /* Cyber Grid + Glowing Orbs */
+  /* Very soft, slow moving light blue, sky blue, and white gradients */
   background: 
-    radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.08), transparent 40%),
-    radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.05), transparent 50%),
-    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-  background-position: 0 0, 0 0, 0 0, 0 0;
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(135, 206, 235, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(173, 216, 230, 0.04) 0%, transparent 50%);
+  filter: blur(60px);
   pointer-events: none;
   z-index: 0;
-  /* Add perspective and animation to the grid */
-  transform: perspective(500px) rotateX(20deg) scale(1.5);
-  animation: grid-move 10s linear infinite;
-  mask-image: radial-gradient(circle at center, black 20%, transparent 80%);
-  -webkit-mask-image: radial-gradient(circle at center, black 20%, transparent 80%);
+  animation: mesh-drift 12s ease-in-out infinite alternate;
 }
 
-@keyframes grid-move {
-  0% { transform: perspective(500px) rotateX(20deg) scale(1.5) translateY(0); }
-  100% { transform: perspective(500px) rotateX(20deg) scale(1.5) translateY(40px); }
+@keyframes mesh-drift {
+  0% { transform: scale(1) translate(0px, 0px); opacity: 0.8; }
+  50% { transform: scale(1.2) translate(50px, -50px); opacity: 1; }
+  100% { transform: scale(1.1) translate(-30px, 30px); opacity: 0.9; }
 }
 
 /* ─── Footer Styles ──────────────────────────────────────────────────────── */
 
 .security-footer {
-  background: linear-gradient(
-    to right,
-    rgba(0, 240, 255, 0.03),
-    rgba(0, 240, 255, 0.06),
-    rgba(0, 240, 255, 0.03)
-  );
+  background: rgba(255, 255, 255, 0.02);
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -487,6 +473,6 @@ body {
 /* ─── Selection Styling ──────────────────────────────────────────────────── */
 
 ::selection {
-  background: rgba(0, 240, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   color: var(--text-primary);
 }
